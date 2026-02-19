@@ -1,0 +1,14 @@
+{
+  "name": "type",
+  "version": "1.0.0",
+  "description": "",
+  "main": "tasks.js",
+  "scripts": {
+    "start": "ts-node --no-warnings tasks.ts",
+    "dev": "ts-node tasks.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
