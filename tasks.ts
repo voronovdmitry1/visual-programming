@@ -56,24 +56,25 @@ interface hasid {
 function findbyid<T extends hasid>(items: T[], id: number): T | undefined {
   return items.find(x => x.id === id);
 }
-// для тестов
-export { 
-  createuser, 
-  createbook, 
-  calculatearea, 
-  getstatuscolor, 
-  capfirst, 
-  trimit, 
-  first, 
-  findbyid 
+
+export {
+  createuser,
+  createbook,
+  calculatearea,
+  getstatuscolor,
+  capfirst,
+  trimit,
+  first,
+  findbyid
 };
+
 // примеры
 const u1 = createuser(1, "иван");
 const u2 = createuser(2, "мария", "m@m.ru", false);
-
 const b1 = createbook({ title: "война и мир", author: "толстой", year: 1869, genre: "fiction" });
 const b2 = createbook({ title: "история", author: "хокинг", genre: "non-fiction" });
 
+console.log("Результат\n");
 console.log("1:", u1, u2);
 console.log("2:", b1, b2);
 console.log("3: круг", calculatearea('circle', 5), "квадрат", calculatearea('square', 4));
