@@ -26,7 +26,7 @@ describe('createbook', () => {
   });
   it('creates book without year', () => {
     const b = createbook({ title: "t", author: "a", genre: "non-fiction" });
-    expect(b.year).toBeUndefined();
+    expect(b.year).toBe(undefined);
   });
 });
 
@@ -50,11 +50,11 @@ describe('formatter', () => {
 describe('first', () => {
   it('numbers', () => expect(first([1,2,3])).toBe(1));
   it('strings', () => expect(first(["a","b"])).toBe("a"));
-  it('empty', () => expect(first([])).toBeUndefined());
+  it('empty', () => expect(first([])).toBe(undefined));
 });
 
 describe('findbyid', () => {
   const items = [{id:1,n:"x"},{id:2,n:"y"}];
   it('finds', () => expect(findbyid(items, 2)).toEqual({id:2,n:"y"}));
-  it('not finds', () => expect(findbyid(items, 3)).toBeUndefined());
+  it('not finds', () => expect(findbyid(items, 3)).toBe(undefined));
 });
