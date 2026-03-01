@@ -56,18 +56,6 @@ interface hasid {
 function findbyid<T extends hasid>(items: T[], id: number): T | undefined {
   return items.find(x => x.id === id);
 }
-
-export {
-  createuser,
-  createbook,
-  calculatearea,
-  getstatuscolor,
-  capfirst,
-  trimit,
-  first,
-  findbyid
-};
-
 // примеры
 const u1 = createuser(1, "иван");
 const u2 = createuser(2, "мария", "m@m.ru", false);
@@ -82,3 +70,13 @@ console.log("4:", getstatuscolor('active'), getstatuscolor('inactive'), getstatu
 console.log("5:", capfirst("привет"), trimit("  hello  "), trimit("  hello  ", true));
 console.log("6:", first([1,2,3]), first(["a","b"]), first([]));
 console.log("7:", findbyid([{id:1,name:"x"},{id:2,name:"y"}], 2));
+export {
+  createuser,
+  createbook,
+  calculatearea,
+  getstatuscolor,
+  capfirst,
+  trimit,
+  first,
+  findbyid
+};

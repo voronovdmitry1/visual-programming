@@ -8,7 +8,7 @@ import {
   trimit, 
   first, 
   findbyid 
-} from './tasks';
+} from './tasks.js';
 
 describe('createuser', () => {
   it('creates user', () => {
