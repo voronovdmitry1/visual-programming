@@ -66,7 +66,7 @@ export {
   trimit, 
   first, 
   findbyid 
-};};
+};
 // примеры
 const u1 = createuser(1, "иван");
 const u2 = createuser(2, "мария", "m@m.ru", false);
