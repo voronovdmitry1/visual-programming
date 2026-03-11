@@ -1,5 +1,11 @@
 import { describe, it, expect, vi } from 'vitest';
 import { f, g } from './csv';
+import { readFile, writeFile } from 'node:fs/promises';
+
+vi.mock('node:fs/promises', () => ({
+  readFile: vi.fn(),
+  writeFile: vi.fn()
+}));
 
 describe('f', () => {
   it('работает', () => {
@@ -28,30 +34,21 @@ describe('f', () => {
 
 describe('g', () => {
   it('вызывает fs', async () => {
-    const r = vi.fn().mockResolvedValue('з1;з2\n1;А\n2;Б');
-    const w = vi.fn().mockResolvedValue(undefined);
+    vi.mocked(readFile).mockResolvedValue('з1;з2\n1;А\n2;Б');
+    vi.mocked(writeFile).mockResolvedValue(undefined);
     
-    vi.doMock('node:fs/promises', () => ({
-      readFile: r,
-      writeFile: w
-    }));
-    
-    const { g } = await import('./csv');
     await g('вход', 'выход', ';');
     
-    expect(r).toHaveBeenCalledWith('вход', 'utf-8');
-    expect(w).toHaveBeenCalledWith('выход', JSON.stringify([
+    expect(readFile).toHaveBeenCalledWith('вход', 'utf-8');
+    expect(writeFile).toHaveBeenCalledWith('выход', JSON.stringify([
       { з1: 1, з2: 'А' },
       { з1: 2, з2: 'Б' }
     ], null, 2));
   });
 
   it('ошибка файла', async () => {
-    const r = vi.fn().mockRejectedValue(new Error('нет файла'));
+    vi.mocked(readFile).mockRejectedValue(new Error('нет файла'));
     
-    vi.doMock('node:fs/promises', () => ({ readFile: r }));
-    
-    const { g } = await import('./csv');
     await expect(g('плохо', 'выход', ';')).rejects.toThrow('ошибка: нет файла');
   });
 });
