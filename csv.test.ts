@@ -47,8 +47,8 @@ describe('g', () => {
   });
 
   it('ошибка файла', async () => {
-    vi.mocked(readFile).mockRejectedValue(new Error('нет файла'));
+    vi.mocked(readFile).mockRejectedValue(new Error('ENOENT: no such file or directory'));
     
-    await expect(g('плохо', 'выход', ';')).rejects.toThrow('ошибка: нет файла');
+    await expect(g('плохо', 'выход', ';')).rejects.toThrow('ошибка: ENOENT');
   });
 });
