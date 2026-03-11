@@ -1,3 +1,5 @@
+import { readFile, writeFile } from 'node:fs/promises';
+
 export function f(a: string[], d: string): object[] {
   if (a.length === 0) throw new Error('пусто');
   
@@ -28,15 +30,13 @@ export async function g(
   o: string,
   d: string
 ): Promise<void> {
-  const fs = require('node:fs/promises');
-  
   try {
-    const data = await fs.readFile(i, 'utf-8');
+    const data = await readFile(i, 'utf-8');
     const lines = data.split('\n').filter(x => x.trim() !== '');
     
     const json = f(lines, d);
-    await fs.writeFile(o, JSON.stringify(json, null, 2));
+    await writeFile(o, JSON.stringify(json, null, 2));
   } catch (err) {
-    throw new Error(`ошибка: ${err.message}`);
+    throw new Error(`ошибка: ${(err as Error).message}`);
   }
 }
